@@ -1,6 +1,5 @@
-import os
-
 # 1. Create a new file and write data
+
 try:
     file = open("student.txt", "w")
 
@@ -16,14 +15,13 @@ except Exception as e:
     print("Error:", e)
 
 
-# 2. Read the contents of the file
+# 2. Read the file
+
 try:
     file = open("student.txt", "r")
 
-    content = file.read()
-
     print("\nFile Content:")
-    print(content)
+    print(file.read())
 
     file.close()
 
@@ -35,6 +33,7 @@ except Exception as e:
 
 
 # 3. Append data to the file
+
 try:
     file = open("student.txt", "a")
 
@@ -51,7 +50,8 @@ except Exception as e:
     print("Error:", e)
 
 
-# 4. Read file after appending
+# 4. Read the file after appending
+
 try:
     file = open("student.txt", "r")
 
@@ -67,21 +67,32 @@ except Exception as e:
     print("Error:", e)
 
 
-# 5. Check whether file exists
-if os.path.exists("student.txt"):
+# 5. Check if file exists
+# No os module is required
+
+try:
+    file = open("student.txt", "r")
+    file.close()
+
     print("\nstudent.txt exists.")
-else:
+
+except FileNotFoundError:
     print("\nstudent.txt does not exist.")
 
 
-# 6. Copy contents to another file
+# 6. Copy contents from one file to another
+
 try:
     file1 = open("student.txt", "r")
+
     content = file1.read()
+
     file1.close()
 
     file2 = open("student_copy.txt", "w")
+
     file2.write(content)
+
     file2.close()
 
     print("File copied successfully.")
@@ -94,6 +105,7 @@ except Exception as e:
 
 
 # 7. Count number of lines
+
 try:
     file = open("student.txt", "r")
 
@@ -104,7 +116,7 @@ try:
 
     file.close()
 
-    print("Number of lines:", count)
+    print("\nNumber of lines:", count)
 
 except FileNotFoundError:
     print("File does not exist.")
@@ -113,7 +125,8 @@ except Exception as e:
     print("Error:", e)
 
 
-# 8. Try to read a non-existing file
+# 8. Try to read a file that does not exist
+
 try:
     file = open("abc.txt", "r")
 
