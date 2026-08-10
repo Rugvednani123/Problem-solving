@@ -1,142 +1,128 @@
 import os
 
+# 1. Create a new file and write data
+try:
+    file = open("student.txt", "w")
 
-# 1. Create a new file and write content
-def create_file(filename, text):
-    try:
-        file = open(filename, "w")
-        file.write(text)
-        file.close()
-        print("File created and data written successfully.")
+    file.write("Name: Rugved\n")
+    file.write("Batch: 2026\n")
+    file.write("Course: Python\n")
 
-    except Exception as e:
-        print("Error:", e)
+    file.close()
 
+    print("File created successfully.")
 
-# 2. Read an existing file
-def read_file(filename):
-    try:
-        file = open(filename, "r")
-        content = file.read()
-        file.close()
-
-        print("File Content:")
-        print(content)
-
-    except FileNotFoundError:
-        print("Error: File does not exist.")
-
-    except Exception as e:
-        print("Error:", e)
+except Exception as e:
+    print("Error:", e)
 
 
-# 3. Append data to an existing file
-def append_file(filename, text):
-    try:
-        file = open(filename, "a")
-        file.write(text)
-        file.close()
-        print("Data appended successfully.")
+# 2. Read the contents of the file
+try:
+    file = open("student.txt", "r")
 
-    except FileNotFoundError:
-        print("Error: File does not exist.")
+    content = file.read()
 
-    except Exception as e:
-        print("Error:", e)
+    print("\nFile Content:")
+    print(content)
 
+    file.close()
 
-# 4. Copy contents from one file to another
-def copy_file(source, destination):
-    try:
-        file1 = open(source, "r")
-        content = file1.read()
-        file1.close()
+except FileNotFoundError:
+    print("File does not exist.")
 
-        file2 = open(destination, "w")
-        file2.write(content)
-        file2.close()
-
-        print("File copied successfully.")
-
-    except FileNotFoundError:
-        print("Error: Source file does not exist.")
-
-    except Exception as e:
-        print("Error:", e)
+except Exception as e:
+    print("Error:", e)
 
 
-# 5. Check whether a file exists
-def check_file(filename):
-    if os.path.exists(filename):
-        print("File exists.")
-    else:
-        print("File does not exist.")
+# 3. Append data to the file
+try:
+    file = open("student.txt", "a")
+
+    file.write("College: GNI\n")
+
+    file.close()
+
+    print("Data appended successfully.")
+
+except FileNotFoundError:
+    print("File does not exist.")
+
+except Exception as e:
+    print("Error:", e)
 
 
-# 6. Count number of lines in a file
-def count_lines(filename):
-    try:
-        file = open(filename, "r")
+# 4. Read file after appending
+try:
+    file = open("student.txt", "r")
 
-        count = 0
+    print("\nFile Content After Appending:")
+    print(file.read())
 
-        for line in file:
-            count = count + 1
+    file.close()
 
-        file.close()
+except FileNotFoundError:
+    print("File does not exist.")
 
-        return count
-
-    except FileNotFoundError:
-        print("Error: File does not exist.")
-        return 0
-
-    except Exception as e:
-        print("Error:", e)
-        return 0
+except Exception as e:
+    print("Error:", e)
 
 
-# Main program
-def main():
-
-    print("----- CREATE FILE -----")
-    create_file(
-        "student.txt",
-        "Name: Rugved\n"
-        "Batch: 2026\n"
-        "Course: Python\n"
-    )
-
-    print("\n----- READ FILE -----")
-    read_file("student.txt")
-
-    print("\n----- APPEND FILE -----")
-    append_file(
-        "student.txt",
-        "College: GNI\n"
-    )
-
-    print("\n----- READ FILE AFTER APPENDING -----")
-    read_file("student.txt")
-
-    print("\n----- CHECK FILE -----")
-    check_file("student.txt")
-
-    print("\n----- COPY FILE -----")
-    copy_file("student.txt", "student_copy.txt")
-
-    print("\n----- READ COPIED FILE -----")
-    read_file("student_copy.txt")
-
-    print("\n----- COUNT LINES -----")
-    lines = count_lines("student.txt")
-    print("Number of lines:", lines)
-
-    print("\n----- CHECK NON-EXISTING FILE -----")
-    check_file("abc.txt")
-
-    print("\n----- READ NON-EXISTING FILE -----")
-    read_file("abc.txt")
+# 5. Check whether file exists
+if os.path.exists("student.txt"):
+    print("\nstudent.txt exists.")
+else:
+    print("\nstudent.txt does not exist.")
 
 
-main()
+# 6. Copy contents to another file
+try:
+    file1 = open("student.txt", "r")
+    content = file1.read()
+    file1.close()
+
+    file2 = open("student_copy.txt", "w")
+    file2.write(content)
+    file2.close()
+
+    print("File copied successfully.")
+
+except FileNotFoundError:
+    print("Source file does not exist.")
+
+except Exception as e:
+    print("Error:", e)
+
+
+# 7. Count number of lines
+try:
+    file = open("student.txt", "r")
+
+    count = 0
+
+    for line in file:
+        count = count + 1
+
+    file.close()
+
+    print("Number of lines:", count)
+
+except FileNotFoundError:
+    print("File does not exist.")
+
+except Exception as e:
+    print("Error:", e)
+
+
+# 8. Try to read a non-existing file
+try:
+    file = open("abc.txt", "r")
+
+    print(file.read())
+
+    file.close()
+
+except FileNotFoundError:
+    print("\nError: abc.txt does not exist.")
+
+except Exception as e:
+    print("Error:", e)
